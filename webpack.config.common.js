@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
-  entry: '',
+  entry: './index.js',
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
@@ -14,8 +14,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html'),
     }),
-    new CopyPlugin({
-      patterns: [{ from: 'source', to: 'dest' }],
-    }),
+    // new CopyPlugin({
+    //   patterns: [{ from: 'public', to: 'dest' }],
+    // }),
   ],
 };
