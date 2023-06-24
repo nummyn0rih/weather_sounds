@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto-Regular.ttf') format('truetype');
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,5 +10,7 @@
 }
 
 body {
+  font-family: 'Roboto', 'sans-serif';
+
   background-color: green;
 }
