@@ -15,9 +15,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html'),
     }),
-    // new CopyPlugin({
-    //   patterns: [{ from: 'public', to: 'dest' }],
-    // }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'public/assets'),
+          to: path.resolve(__dirname, 'dist/assets'),
+        },
+      ],
+    }),
     new MiniCssExtractPlugin(),
   ],
   module: {
