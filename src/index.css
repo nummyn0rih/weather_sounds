@@ -38,7 +38,6 @@ h1 {
 }
 
 .btn {
-  margin-left: 10px;
   padding: 10px 20px;
 
   width: 160px;
@@ -48,6 +47,10 @@ h1 {
   border-radius: 25px;
 
   cursor: pointer;
+}
+
+.btn:not(:first-child) {
+  margin-left: 10px;
 }
 
 .btn svg {
