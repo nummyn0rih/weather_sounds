@@ -1,5 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
@@ -34,6 +34,14 @@ module.exports = {
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
+      },
+      {
+        test: /.(jpe?g|png|webp|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.svg$/,
+        loader: 'raw-loader',
       },
     ],
   },
