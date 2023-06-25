@@ -11,6 +11,49 @@
 
 body {
   font-family: 'Roboto', 'sans-serif';
+}
 
-  background-color: green;
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  margin-top: 10px;
+
+  color: #FF5733;
+
+  font-size: 3rem;
+}
+
+.btn-container {
+  display: flex;
+
+  margin-top: 15px;
+}
+
+.btn {
+  margin-left: 10px;
+  padding: 10px 20px;
+  width: 160px;
+  height: 160px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #FF5733;
+  color: #fff;
+
+  border: 1px solid #EAEAEA;
+  border-radius: 25px;
+
+  cursor: pointer;
+}
+
+.range {
+  margin-top: 15px;
+
+  cursor: pointer;
 }
