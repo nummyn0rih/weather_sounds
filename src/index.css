@@ -16,11 +16,18 @@ body {
 }
 
 main {
+  height: 100%;
+}
+
+.blur {
   display: flex;
   flex-direction: column;
   align-items: center;
 
   height: 100%;
+  width: 100%;
+
+  backdrop-filter: blur(4px);
 }
 
 h1 {
