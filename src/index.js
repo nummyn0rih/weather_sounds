@@ -1,4 +1,5 @@
 import weathers from './weathersList.js';
+import pauseIcon from '../public/assets/icons/pause.svg';
 import './index.css';
 
 const state = {
@@ -8,14 +9,35 @@ const state = {
 
 const audio = document.querySelector('#audio');
 
+const changeIcon = (id, status) => {
+  const btn = document.querySelector(`#btn-${id}`);
+
+  switch (status) {
+    case 'pause':
+      btn.innerHTML = pauseIcon;
+      break;
+    case 'play':
+      const icon = weathers.find((el) => el.id === id).icon;
+      btn.innerHTML = icon;
+      break;
+    default:
+      break;
+  }
+};
+
 const play = (id) => () => {
+  const { currentTrackID, isPlaying } = state;
+
   const weather = weathers.find((el) => el.id === id);
 
-  if (state.currentTrackID === id) {
-    state.isPlaying
-      ? (audio.pause(), (state.isPlaying = false))
-      : (audio.play(), (state.isPlaying = true));
+  if (currentTrackID === id) {
+    isPlaying
+      ? (audio.pause(), (state.isPlaying = false), changeIcon(id, 'pause'))
+      : (audio.play(), (state.isPlaying = true), changeIcon(id, 'play'));
   } else {
+    if (currentTrackID !== 0) {
+      changeIcon(currentTrackID, 'play');
+    }
     state.currentTrackID = id;
     state.isPlaying = true;
     audio.src = weather.sound;
@@ -35,6 +57,7 @@ const createButtonIMG = (data) => {
   btn.style.backgroundImage = `url(${data.bg})`;
   btn.style.backgroundSize = 'cover';
   btn.innerHTML = data.icon;
+  btn.id = `btn-${data.id}`;
   btn.addEventListener('click', play(data.id));
 
   return btn;
