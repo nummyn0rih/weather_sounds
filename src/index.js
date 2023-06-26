@@ -8,6 +8,7 @@ const state = {
 };
 
 const audio = document.querySelector('#audio');
+const app = document.querySelector('#app');
 
 const changeIcon = (id, status) => {
   const btn = document.querySelector(`#btn-${id}`);
@@ -25,9 +26,14 @@ const changeIcon = (id, status) => {
   }
 };
 
+const changeBg = (id) => {
+  const { bg } = weathers.find((el) => el.id === id);
+
+  app.style.backgroundImage = `url(${bg})`;
+};
+
 const play = (id) => () => {
   const { currentTrackID, isPlaying } = state;
-
   const weather = weathers.find((el) => el.id === id);
 
   if (currentTrackID === id) {
@@ -41,6 +47,7 @@ const play = (id) => () => {
     state.currentTrackID = id;
     state.isPlaying = true;
     audio.src = weather.sound;
+    changeBg(id);
     audio.play();
   }
 };
