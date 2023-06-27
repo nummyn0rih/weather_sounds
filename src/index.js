@@ -1,4 +1,4 @@
-import weathers from './weathersList.js';
+import weathers from './weathersList';
 import pauseIcon from '../public/assets/icons/pause.svg';
 import './index.css';
 
@@ -18,8 +18,7 @@ const changeIcon = (id, status) => {
       btn.innerHTML = pauseIcon;
       break;
     case 'play':
-      const icon = weathers.find((el) => el.id === id).icon;
-      btn.innerHTML = icon;
+      btn.innerHTML = weathers.find((el) => el.id === id).icon;
       break;
     default:
       break;
@@ -37,9 +36,15 @@ const play = (id) => () => {
   const weather = weathers.find((el) => el.id === id);
 
   if (currentTrackID === id) {
-    isPlaying
-      ? (audio.pause(), (state.isPlaying = false), changeIcon(id, 'pause'))
-      : (audio.play(), (state.isPlaying = true), changeIcon(id, 'play'));
+    if (isPlaying) {
+      audio.pause();
+      state.isPlaying = false;
+      changeIcon(id, 'pause');
+    } else {
+      audio.play();
+      state.isPlaying = true;
+      changeIcon(id, 'play');
+    }
   } else {
     if (currentTrackID !== 0) {
       changeIcon(currentTrackID, 'play');
