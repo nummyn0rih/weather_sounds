@@ -7,8 +7,14 @@ const state = {
   isPlaying: false,
 };
 
-const audio = document.querySelector('#audio');
 const app = document.querySelector('#app');
+const container = document.querySelector('#weathers');
+const audio = document.querySelector('#audio');
+const volume = document.querySelector('#volume');
+
+volume.addEventListener('input', () => {
+  audio.volume = volume.value;
+});
 
 const changeIcon = (id, status) => {
   const btn = document.querySelector(`#btn-${id}`);
@@ -74,8 +80,6 @@ const createButtonIMG = (data) => {
 
   return btn;
 };
-
-const container = document.querySelector('#weathers');
 
 const buttonsList = weathers.map((item) => createButtonIMG(item));
 
