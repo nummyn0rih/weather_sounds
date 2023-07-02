@@ -34,29 +34,35 @@ const changeBg = (id: number): void => {
   app.style.backgroundImage = `url(${bg})`
 }
 
-const play = (id: number) => (): void => {
-  const { currentTrackID, isPlaying } = state
-  const weather: Weather = weathers[id]
+const changeTrack = (id: number, weather: Weather): void => {
+  const { currentTrackID } = state
 
-  if (currentTrackID === id) {
-    if (isPlaying) {
-      audio.pause()
-      state.isPlaying = false
-      changeIcon(id, 'pause')
-    } else {
-      void audio.play()
-      state.isPlaying = true
-      changeIcon(id, 'play')
-    }
-  } else {
-    if (currentTrackID !== 0) {
-      changeIcon(currentTrackID, 'play')
-    }
-    state.currentTrackID = id
-    state.isPlaying = true
-    audio.src = weather.sound
+  if (currentTrackID !== 0) {
+    changeIcon(currentTrackID, 'play')
+  }
+
+  state.currentTrackID = id
+  state.isPlaying = true
+  audio.src = weather.sound
+}
+
+const play = (id: number) => (): void => {
+  const weather: Weather = weathers[id]
+  const { currentTrackID, isPlaying } = state
+  const isTrackChanged = currentTrackID !== id
+
+  if (isTrackChanged) {
+    changeTrack(id, weather)
     changeBg(id)
     void audio.play()
+  } else if (isPlaying) {
+    audio.pause()
+    state.isPlaying = false
+    changeIcon(id, 'pause')
+  } else {
+    void audio.play()
+    state.isPlaying = true
+    changeIcon(id, 'play')
   }
 }
 
